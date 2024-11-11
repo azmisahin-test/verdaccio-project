@@ -14,3 +14,8 @@ Go to the project directory and start the Docker container by running the follow
 ```bash
 docker-compose up -d
 ```
+
+### 3. Use
+```
+npm set registry http://localhost:4873
+```
