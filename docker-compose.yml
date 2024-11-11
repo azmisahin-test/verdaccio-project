@@ -1,0 +1,29 @@
+services:
+  verdaccio:
+    image: verdaccio/verdaccio
+    container_name: verdaccio
+    ports:
+      - "4873:4873"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./config.yaml:/verdaccio/conf/config.yaml
+      - verdaccio-storage:/verdaccio/storage
+      - verdaccio-logs:/verdaccio/logs
+    networks:
+      - network_shared
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4873"]
+      interval: 30s
+      retries: 3
+    deploy:
+      replicas: 1
+
+volumes:
+  verdaccio-storage: 
+  verdaccio-logs: 
+
+networks:
+  network_shared:
+    external: true
