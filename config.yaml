@@ -1,0 +1,22 @@
+# Verdaccio Config File
+
+storage: /verdaccio/storage
+auth:
+  htpasswd:
+    file: /verdaccio/storage/htpasswd
+packages:
+  '@*/*':
+    access: $authenticated
+    publish: $authenticated
+    proxy: npmjs  # Proxy bağlantısı
+  '**':
+    access: $anonymous
+    proxy: npmjs
+uplinks:
+  npmjs:
+    url: https://registry.npmjs.org/
+    cache: true
+middlewares:
+  audit:
+    enabled: true
+listen: 0.0.0.0:4873
